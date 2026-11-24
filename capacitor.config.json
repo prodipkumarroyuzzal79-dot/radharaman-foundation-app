@@ -1,0 +1,15 @@
+{
+  "appId": "com.radharaman.foundation",
+  "appName": "Radharaman Foundation",
+  "webDir": "www",
+  "server": {
+    "url": "https://prodipkumarroyuzzal79-dot.github.io/radharaman-foundation-app/",
+    "cleartext": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#064E3B"
+    }
+  }
+}
