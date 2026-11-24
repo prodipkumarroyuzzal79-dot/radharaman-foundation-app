@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#075b36">
+<title>রাধারমন সনাতনী ফাউন্ডেশন</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f3;color:#173c2b}
+header{background:#075b36;color:white;text-align:center;padding:25px 12px}
+.logo{font-size:42px}
+header h2{margin:8px 0}
+header p{margin:5px}
+nav{display:flex;flex-wrap:wrap;justify-content:center;background:#06472c}
+nav button{background:none;border:0;color:white;padding:13px 10px;font-size:14px}
+main{padding:15px;max-width:850px;margin:auto}
+.welcome{background:#e2f1e5;padding:20px;border-radius:12px;text-align:center}
+h3{color:#087343}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.item{background:white;padding:18px 8px;text-align:center;border-radius:12px;box-shadow:0 2px 7px #0001}
+.item span{font-size:28px}
+.item p{margin:8px 0 0}
+section{background:white;margin:15px 0;padding:18px;border-radius:12px}
+footer{background:#075b36;color:white;text-align:center;padding:18px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🪔</div>
+<h2>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</h2>
+<p>কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর</p>
+</header>
+
+<nav>
+<button onclick="show('home')">হোম</button>
+<button onclick="show('about')">পরিচিতি</button>
+<button onclick="show('committee')">কমিটি</button>
+<button onclick="show('constitution')">গঠনতন্ত্র</button>
+<button onclick="show('contact')">যোগাযোগ</button>
+</nav>
+
+<main>
+<div id="home">
+<div class="welcome">
+<h3>স্বাগতম</h3>
+<p>সেবা, ঐক্য, মানবতা ও সনাতনী চেতনায় আমাদের পথচলা।</p>
+<p>ফাউন্ডেশনের সকল কার্যক্রম ও তথ্য এখানে পাওয়া যাবে।</p>
+</div>
+
+<h3>প্রধান বিভাগসমূহ</h3>
+<div class="grid">
+<div class="item" onclick="show('about')"><span>🏛️</span><p>ফাউন্ডেশন পরিচিতি</p></div>
+<div class="item" onclick="show('committee')"><span>👥</span><p>সাংগঠনিক কাঠামো</p></div>
+<div class="item" onclick="show('constitution')"><span>📖</span><p>গঠনতন্ত্র</p></div>
+<div class="item" onclick="show('finance')"><span>💰</span><p>আয়-ব্যয় ও হিসাব</p></div>
+<div class="item" onclick="show('notice')"><span>📢</span><p>নোটিশ ও সংবাদ</p></div>
+<div class="item" onclick="show('meeting')"><span>📝</span><p>সভা ও রেজুলেশন</p></div>
+<div class="item" onclick="show('gallery')"><span>📸</span><p>ছবি ও অনুষ্ঠান</p></div>
+<div class="item" onclick="show('contact')"><span>☎️</span><p>যোগাযোগ</p></div>
+</div>
+</div>
+
+<section id="about" hidden>
+<h3>ফাউন্ডেশন পরিচিতি</h3>
+<p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন একটি সনাতনী সামাজিক ও সাংস্কৃতিক সংগঠন।</p>
+</section>
+
+<section id="committee" hidden>
+<h3>সাংগঠনিক কাঠামো</h3>
+<p>স্থায়ী প্রতিষ্ঠাতা পরিষদ</p>
+<p>পরিচালনা পরিষদ</p>
+<p>উপদেষ্টা পরিষদ ও বিভিন্ন উপকমিটি</p>
+</section>
+
+<section id="constitution" hidden>
+<h3>গঠনতন্ত্র</h3>
+<p>ফাউন্ডেশনের গঠনতন্ত্র ও নীতিমালা এখানে প্রকাশ করা হবে।</p>
+</section>
+
+<section id="finance" hidden>
+<h3>আর্থিক ব্যবস্থাপনা</h3>
+<p>অনুদান, রসিদ, ভাউচার, আয়-ব্যয় ও আর্থিক প্রতিবেদন।</p>
+</section>
+
+<section id="notice" hidden>
+<h3>নোটিশ ও সংবাদ</h3>
+<p>ফাউন্ডেশনের বিজ্ঞপ্তি ও কার্যক্রম এখানে প্রকাশিত হবে।</p>
+</section>
+
+<section id="meeting" hidden>
+<h3>সভা ও রেজুলেশন</h3>
+<p>সভা, উপস্থিতি, কার্যবিবরণী ও সিদ্ধান্ত সংরক্ষণ।</p>
+</section>
+
+<section id="gallery" hidden>
+<h3>ছবি ও অনুষ্ঠান</h3>
+<p>ফাউন্ডেশনের বিভিন্ন কার্যক্রমের ছবি ও সংবাদ।</p>
+</section>
+
+<section id="contact" hidden>
+<h3>যোগাযোগ</h3>
+<p>ঠিকানা: কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর।</p>
+</section>
+</main>
+
+<footer>
+<p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</p>
+<p>সেবা • ঐক্য • মানবতা</p>
+</footer>
+
+<script>
+function show(id){
+document.querySelectorAll('main > section').forEach(s=>s.hidden=true);
+document.getElementById('home').hidden=(id!=='home');
+if(id!=='home') document.getElementById(id).hidden=false;
+window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
