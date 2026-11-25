@@ -136,5 +136,31 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 </script>
+
+<div id="adminArea" style="padding:20px;margin:15px;background:#e8f3eb;border-radius:12px;">
+<h3>অ্যাডমিন লগইন</h3>
+<input id="adminEmail" type="email" placeholder="ইমেইল" style="padding:12px;width:100%;margin:5px 0;">
+<input id="adminPass" type="password" placeholder="পাসওয়ার্ড" style="padding:12px;width:100%;margin:5px 0;">
+<button onclick="adminLogin()" style="padding:12px;background:#075b36;color:white;">লগইন</button>
+<button onclick="adminLogout()" style="padding:12px;">লগআউট</button>
+<p id="loginStatus">লগইন করা হয়নি</p>
+</div>
+<script>
+async function adminLogin(){
+ const e=document.getElementById("adminEmail").value;
+ const p=document.getElementById("adminPass").value;
+ const s=document.getElementById("loginStatus");
+ try{
+  await auth.signInWithEmailAndPassword(e,p);
+  s.textContent="লগইন সফল। Admin অনুমতি যাচাই বাকি।";
+ }catch(error){
+  s.textContent="লগইন ব্যর্থ। তথ্য পরীক্ষা করুন।";
+ }
+}
+async function adminLogout(){
+ await auth.signOut();
+ document.getElementById("loginStatus").textContent="লগআউট হয়েছে";
+}
+</script>
 </body>
 </html>
