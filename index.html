@@ -1,233 +1,341 @@
 
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#075b36">
-<title>রাধারমন সনাতনী ফাউন্ডেশন</title>
+<title>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7f3;color:#173c2b}
-header{background:#075b36;color:white;text-align:center;padding:25px 12px}
-.logo{font-size:42px}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f4f7f3;
+ color:#173c2b;
+}
+header{
+ background:linear-gradient(135deg,#06472c,#087343);
+ color:white;
+ text-align:center;
+ padding:28px 12px;
+}
+.logo{font-size:45px}
 header h2{margin:8px 0}
-header p{margin:5px}
-nav{display:flex;flex-wrap:wrap;justify-content:center;background:#06472c}
-nav button{background:none;border:0;color:white;padding:13px 10px;font-size:14px}
-main{padding:15px;max-width:850px;margin:auto}
-.welcome{background:#e2f1e5;padding:20px;border-radius:12px;text-align:center}
+.slogan{
+ font-size:24px;
+ font-weight:bold;
+ color:#ffe49a;
+ margin:12px;
+}
+nav{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ background:#063d27;
+}
+nav button{
+ background:none;
+ border:0;
+ color:white;
+ padding:13px 12px;
+ font-size:14px;
+ cursor:pointer;
+}
+nav button:hover{background:#087343}
+main{
+ padding:15px;
+ max-width:900px;
+ margin:auto;
+}
+.welcome{
+ background:#e2f1e5;
+ padding:25px 15px;
+ border-radius:12px;
+ text-align:center;
+}
 h3{color:#087343}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.item{background:white;padding:18px 8px;text-align:center;border-radius:12px;box-shadow:0 2px 7px #0001}
-.item span{font-size:28px}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+.item{
+ background:white;
+ padding:20px 8px;
+ text-align:center;
+ border-radius:12px;
+ box-shadow:0 2px 7px #0001;
+ cursor:pointer;
+}
+.item span{font-size:30px}
 .item p{margin:8px 0 0}
-section{background:white;margin:15px 0;padding:18px;border-radius:12px}
-footer{background:#075b36;color:white;text-align:center;padding:18px}
+section{
+ background:white;
+ margin:15px 0;
+ padding:20px;
+ border-radius:12px;
+}
+input,textarea{
+ display:block;
+ width:100%;
+ padding:12px;
+ margin:8px 0;
+ border:1px solid #bbb;
+ border-radius:6px;
+ font-size:15px;
+}
+.action{
+ padding:12px 18px;
+ background:#075b36;
+ color:white;
+ border:0;
+ border-radius:6px;
+ cursor:pointer;
+ margin:5px 3px;
+}
+#adminArea{
+ background:#e8f3eb;
+ border:1px solid #c6ddcb;
+}
+#adminDashboard{
+ display:none;
+ background:white;
+ padding:15px;
+ border-radius:8px;
+ margin-top:15px;
+}
+#loginStatus{
+ font-weight:bold;
+ overflow-wrap:anywhere;
+}
+footer{
+ background:#075b36;
+ color:white;
+ text-align:center;
+ padding:20px;
+ margin-top:20px;
+}
+@media(max-width:480px){
+ nav button{padding:11px 8px;font-size:13px}
+ .slogan{font-size:21px}
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<div class="logo">🪔</div>
-<h2>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</h2>
-<p>কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর</p>
+ <div class="logo">🪔</div>
+ <h2>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</h2>
+ <p>কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর</p>
+ <div class="slogan">আলো আসবেই</div>
 </header>
 
 <nav>
-<button onclick="show('home')">হোম</button>
-<button onclick="show('about')">পরিচিতি</button>
-<button onclick="show('committee')">কমিটি</button>
-<button onclick="show('constitution')">গঠনতন্ত্র</button>
-<button onclick="show('contact')">যোগাযোগ</button>
+ <button onclick="showPage('home')">হোম</button>
+ <button onclick="showPage('about')">পরিচিতি</button>
+ <button onclick="showPage('committee')">কমিটি</button>
+ <button onclick="showPage('notice')">নোটিশ</button>
+ <button onclick="showPage('activity')">কার্যক্রম</button>
+ <button onclick="showPage('gallery')">ছবি</button>
+ <button onclick="showPage('contact')">যোগাযোগ</button>
+ <button onclick="showPage('application')">আবেদন</button>
 </nav>
 
 <main>
-<div id="home">
-<div class="welcome">
-<h3>স্বাগতম</h3>
-<p>সেবা, ঐক্য, মানবতা ও সনাতনী চেতনায় আমাদের পথচলা।</p>
-<p>ফাউন্ডেশনের সকল কার্যক্রম ও তথ্য এখানে পাওয়া যাবে।</p>
+
+<div id="home" class="page">
+ <div class="welcome">
+  <h3>স্বাগতম</h3>
+  <h2>আলো আসবেই</h2>
+  <p>সেবা, ঐক্য, মানবতা ও সনাতনী চেতনায় আমাদের পথচলা।</p>
+  <p>ফাউন্ডেশনের সকল কার্যক্রম ও তথ্য এখানে পাওয়া যাবে।</p>
+ </div>
+
+ <h3>আমাদের বিভাগসমূহ</h3>
+
+ <div class="grid">
+  <div class="item" onclick="showPage('about')">
+   <span>🏛️</span><p>পরিচিতি</p>
+  </div>
+  <div class="item" onclick="showPage('committee')">
+   <span>👥</span><p>কমিটি</p>
+  </div>
+  <div class="item" onclick="showPage('notice')">
+   <span>📢</span><p>নোটিশ</p>
+  </div>
+  <div class="item" onclick="showPage('activity')">
+   <span>🌿</span><p>কার্যক্রম</p>
+  </div>
+  <div class="item" onclick="showPage('gallery')">
+   <span>📸</span><p>ছবি</p>
+  </div>
+  <div class="item" onclick="showPage('contact')">
+   <span>☎️</span><p>যোগাযোগ</p>
+  </div>
+  <div class="item" onclick="showPage('application')">
+   <span>📄</span><p>আবেদন</p>
+  </div>
+ </div>
 </div>
 
-<h3>প্রধান বিভাগসমূহ</h3>
-<div class="grid">
-<div class="item" onclick="show('about')"><span>🏛️</span><p>ফাউন্ডেশন পরিচিতি</p></div>
-<div class="item" onclick="show('committee')"><span>👥</span><p>সাংগঠনিক কাঠামো</p></div>
-<div class="item" onclick="show('constitution')"><span>📖</span><p>গঠনতন্ত্র</p></div>
-<div class="item" onclick="show('finance')"><span>💰</span><p>আয়-ব্যয় ও হিসাব</p></div>
-<div class="item" onclick="show('notice')"><span>📢</span><p>নোটিশ ও সংবাদ</p></div>
-<div class="item" onclick="show('meeting')"><span>📝</span><p>সভা ও রেজুলেশন</p></div>
-<div class="item" onclick="show('gallery')"><span>📸</span><p>ছবি ও অনুষ্ঠান</p></div>
-<div class="item" onclick="show('contact')"><span>☎️</span><p>যোগাযোগ</p></div>
-</div>
-</div>
-
-<section id="about" hidden>
-<h3>ফাউন্ডেশন পরিচিতি</h3>
-<p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন একটি সনাতনী সামাজিক ও সাংস্কৃতিক সংগঠন।</p>
+<section id="about" class="page" hidden>
+ <h3>ফাউন্ডেশন পরিচিতি</h3>
+ <p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন একটি সনাতনী সামাজিক, সাংস্কৃতিক ও মানবকল্যাণমূলক সংগঠন।</p>
+ <p><strong>আমাদের স্লোগান: আলো আসবেই</strong></p>
+ <p>সেবা, ঐক্য, মানবতা ও সনাতনী চেতনার বিকাশ আমাদের মূল লক্ষ্য।</p>
 </section>
 
-<section id="committee" hidden>
-<h3>সাংগঠনিক কাঠামো</h3>
-<p>স্থায়ী প্রতিষ্ঠাতা পরিষদ</p>
-<p>পরিচালনা পরিষদ</p>
-<p>উপদেষ্টা পরিষদ ও বিভিন্ন উপকমিটি</p>
+<section id="committee" class="page" hidden>
+ <h3>সাংগঠনিক কাঠামো</h3>
+ <p>ফাউন্ডেশনের স্থায়ী পরিষদ, পরিচালনা পরিষদ, উপদেষ্টা পরিষদ এবং বিভিন্ন উপকমিটির তথ্য এখানে প্রকাশ করা হবে।</p>
 </section>
 
-<section id="constitution" hidden>
-<h3>গঠনতন্ত্র</h3>
-<p>ফাউন্ডেশনের গঠনতন্ত্র ও নীতিমালা এখানে প্রকাশ করা হবে।</p>
+<section id="notice" class="page" hidden>
+ <h3>নোটিশ ও সংবাদ</h3>
+ <p>ফাউন্ডেশনের সকল বিজ্ঞপ্তি, ঘোষণা ও সংবাদ এখানে প্রকাশ করা হবে।</p>
 </section>
 
-<section id="finance" hidden>
-<h3>আর্থিক ব্যবস্থাপনা</h3>
-<p>অনুদান, রসিদ, ভাউচার, আয়-ব্যয় ও আর্থিক প্রতিবেদন।</p>
+<section id="activity" class="page" hidden>
+ <h3>ফাউন্ডেশনের কার্যক্রম</h3>
+ <p>ফাউন্ডেশনের সামাজিক, ধর্মীয়, সাংস্কৃতিক, শিক্ষামূলক ও মানবকল্যাণমূলক কার্যক্রমের তথ্য এখানে প্রকাশ করা হবে।</p>
 </section>
 
-<section id="notice" hidden>
-<h3>নোটিশ ও সংবাদ</h3>
-<p>ফাউন্ডেশনের বিজ্ঞপ্তি ও কার্যক্রম এখানে প্রকাশিত হবে।</p>
+<section id="gallery" class="page" hidden>
+ <h3>ছবি ও অনুষ্ঠান</h3>
+ <p>ফাউন্ডেশনের বিভিন্ন অনুষ্ঠান, সামাজিক কার্যক্রম ও ছবি এখানে প্রকাশ করা হবে।</p>
 </section>
 
-<section id="meeting" hidden>
-<h3>সভা ও রেজুলেশন</h3>
-<p>সভা, উপস্থিতি, কার্যবিবরণী ও সিদ্ধান্ত সংরক্ষণ।</p>
+<section id="contact" class="page" hidden>
+ <h3>যোগাযোগ</h3>
+ <p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</p>
+ <p>ঠিকানা: কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর।</p>
 </section>
 
-<section id="gallery" hidden>
-<h3>ছবি ও অনুষ্ঠান</h3>
-<p>ফাউন্ডেশনের বিভিন্ন কার্যক্রমের ছবি ও সংবাদ।</p>
+<section id="application" class="page" hidden>
+ <h3>আবেদন</h3>
+ <p>সদস্যপদ অথবা অন্যান্য বিষয়ে আবেদন করতে নিচের তথ্য পূরণ করুন।</p>
+ <form id="applicationForm">
+  <input id="appName" type="text" placeholder="আবেদনকারীর নাম" required>
+  <input id="appPhone" type="tel" placeholder="মোবাইল নম্বর" required>
+  <input id="appAddress" type="text" placeholder="ঠিকানা" required>
+  <textarea id="appDetails" rows="4" placeholder="আবেদনের বিষয় লিখুন" required></textarea>
+  <button class="action" type="submit">আবেদন জমা দিন</button>
+ </form>
+ <p id="applicationStatus"></p>
 </section>
 
-<section id="contact" hidden>
-<h3>যোগাযোগ</h3>
-<p>ঠিকানা: কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর।</p>
+<section id="adminArea">
+ <h3>Super Admin লগইন</h3>
+ <input id="adminEmail" type="email" placeholder="অ্যাডমিন ইমেইল">
+ <input id="adminPass" type="password" placeholder="পাসওয়ার্ড">
+
+ <button class="action" type="button" onclick="adminLogin()">লগইন</button>
+ <button class="action" type="button" onclick="adminLogout()">লগআউট</button>
+
+ <p id="loginStatus">লগইন করা হয়নি</p>
+
+ <div id="adminDashboard">
+  <h3>Super Admin প্যানেল</h3>
+  <p>Super Admin হিসেবে প্রবেশ সফল হয়েছে।</p>
+  <p>পরবর্তী ধাপে এখান থেকে ফাউন্ডেশনের তথ্য পরিচালনার সুবিধা যুক্ত করা হবে।</p>
+ </div>
 </section>
+
 </main>
 
 <footer>
-<p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</p>
-<p>সেবা • ঐক্য • মানবতা</p>
+ <h3 style="color:white">শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</h3>
+ <p>আলো আসবেই</p>
+ <p>সেবা • ঐক্য • মানবতা</p>
 </footer>
 
-<script>
-function show(id){
-document.querySelectorAll('main > section').forEach(s=>s.hidden=true);
-document.getElementById('home').hidden=(id!=='home');
-if(id!=='home') document.getElementById(id).hidden=false;
-window.scrollTo(0,0);
-}
-</script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
 <script>
+// Firebase Connection
 const firebaseConfig = {
-  apiKey: "AIzaSyDohiPYANaOW_Pm7XeBfRo5Q2ehqLkINNU",
-  authDomain: "radharaman-sanatani-foun-5d5cd.firebaseapp.com",
-  projectId: "radharaman-sanatani-foun-5d5cd",
-  storageBucket: "radharaman-sanatani-foun-5d5cd.firebasestorage.app",
-  messagingSenderId: "336112155496",
-  appId: "1:336112155496:web:f0fcefe38c44c43fd934dd"
+ apiKey: "AIzaSyDohiPYANaOW_Pm7XeBfRo5Q2ehqLkINNU",
+ authDomain: "radharaman-sanatani-foun-5d5cd.firebaseapp.com",
+ projectId: "radharaman-sanatani-foun-5d5cd",
+ storageBucket: "radharaman-sanatani-foun-5d5cd.firebasestorage.app",
+ messagingSenderId: "336112155496",
+ appId: "1:336112155496:web:f0fcefe38c44c43fd934dd"
 };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-</script>
 
-<div id="adminArea" style="padding:20px;margin:15px;background:#e8f3eb;border-radius:12px;">
-<h3>অ্যাডমিন লগইন</h3>
-<input id="adminEmail" type="email" placeholder="ইমেইল" style="padding:12px;width:100%;margin:5px 0;">
-<input id="adminPass" type="password" placeholder="পাসওয়ার্ড" style="padding:12px;width:100%;margin:5px 0;">
-<button onclick="adminLogin()" style="padding:12px;background:#075b36;color:white;">লগইন</button>
-<button onclick="adminLogout()" style="padding:12px;">লগআউট</button>
-<p id="loginStatus">লগইন করা হয়নি</p>
-</div>
-<script>
-<script>
-async function adminLogin() {
-  const email = document.getElementById("adminEmail").value.trim();
-  const password = document.getElementById("adminPass").value;
-  const status = document.getElementById("loginStatus");
-
-  if (!email || !password) {
-    status.textContent = "ইমেইল ও পাসওয়ার্ড লিখুন।";
-    return;
-  }
-
-  try {
-    status.textContent = "লগইন যাচাই হচ্ছে...";
-
-    const result = await auth.signInWithEmailAndPassword(
-      email,
-      password
-    );
-
-    const uid = result.user.uid;
-
-    const doc = await db.collection("admins").doc(uid).get();
-
-    if (
-      doc.exists &&
-      doc.data().role === "super_admin" &&
-      doc.data().active === true
-    ) {
-      status.textContent = "Super Admin হিসেবে প্রবেশ সফল!";
-    } else {
-      await auth.signOut();
-      status.textContent = "আপনার Admin অনুমতি পাওয়া যায়নি।";
-    }
-
-  } catch (error) {
-    status.textContent = "সমস্যা: " + error.code;
-  }
+// Page Navigation
+function showPage(id){
+ document.querySelectorAll(".page").forEach(page=>{
+  page.hidden = true;
+ });
+ const selected = document.getElementById(id);
+ if(selected) selected.hidden = false;
+ window.scrollTo(0,0);
 }
 
-async function adminLogout() {
+// Super Admin Login
+async function adminLogin(){
+ const email = document.getElementById("adminEmail").value.trim();
+ const password = document.getElementById("adminPass").value;
+ const status = document.getElementById("loginStatus");
+
+ if(!email || !password){
+  status.textContent = "ইমেইল ও পাসওয়ার্ড লিখুন।";
+  return;
+ }
+
+ try{
+  status.textContent = "লগইন যাচাই হচ্ছে...";
+  const result = await auth.signInWithEmailAndPassword(email,password);
+  const uid = result.user.uid;
+  const adminDoc = await db.collection("admins").doc(uid).get();
+
+  if(adminDoc.exists &&
+     adminDoc.data().role === "super_admin" &&
+     adminDoc.data().active === true){
+
+   status.textContent = "Super Admin হিসেবে প্রবেশ সফল!";
+   document.getElementById("adminDashboard").style.display = "block";
+
+  }else{
+   await auth.signOut();
+   status.textContent = "আপনার Admin অনুমতি পাওয়া যায়নি।";
+   document.getElementById("adminDashboard").style.display = "none";
+  }
+
+ }catch(error){
+  status.textContent = "লগইন সমস্যা: " + error.code;
+ }
+}
+
+// Super Admin Logout
+async function adminLogout(){
+ try{
   await auth.signOut();
   document.getElementById("loginStatus").textContent = "লগআউট হয়েছে।";
-}
-</script>
-{
- const email=document.getElementById("adminEmail").value;
- const password=document.getElementById("adminPass").value;
- const status=document.getElementById("loginStatus");
-
- try {
-   const result=await auth.signInWithEmailAndPassword(email,password);
-   const uid=result.user.uid;
-
-   const doc=await db.collection("admins").doc(uid).get();
-
-   if(doc.exists &&
-      doc.data().role==="super_admin" &&
-      doc.data().active===true){
-     status.textContent="Super Admin হিসেবে প্রবেশ সফল!";
-   } else {
-     await auth.signOut();
-     status.textContent="আপনার Admin অনুমতি পাওয়া যায়নি।";
-   }
- } catch(error) {
-   status.textContent="লগইন বা অনুমতি যাচাই ব্যর্থ হয়েছে।";
- }
-}
-{
- const e=document.getElementById("adminEmail").value;
- const p=document.getElementById("adminPass").value;
- const s=document.getElementById("loginStatus");
- try{
-  await auth.signInWithEmailAndPassword(e,p);
-  s.textContent="লগইন সফল। Admin অনুমতি যাচাই বাকি।";
+  document.getElementById("adminDashboard").style.display = "none";
  }catch(error){
-  s.textContent="লগইন ব্যর্থ। তথ্য পরীক্ষা করুন।";
+  document.getElementById("loginStatus").textContent =
+   "লগআউট সমস্যা: " + error.code;
  }
 }
-async function adminLogout(){
- await auth.signOut();
- document.getElementById("loginStatus").textContent="লগআউট হয়েছে";
-}
+
+// Application Form
+document.getElementById("applicationForm").addEventListener("submit",function(event){
+ event.preventDefault();
+ document.getElementById("applicationStatus").textContent =
+  "আবেদন গ্রহণের ব্যবস্থা এখনো চালু হয়নি। অনুগ্রহ করে পরে চেষ্টা করুন।";
+});
 </script>
+
 </body>
 </html>
