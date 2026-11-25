@@ -1,82 +1,194 @@
+
+
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#064e3b">
 <title>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</title>
+
 <style>
-:root{--g:#064e3b;--g2:#08704f;--gold:#d6ad55;--cream:#fffaf0;--ink:#18352b;--line:#e6e9e3}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:#f6f8f4;color:var(--ink);line-height:1.65}
+:root{--g:#064e3b;--g2:#08704f;--gold:#d6ad55;--ink:#18352b;--line:#e6e9e3}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:#f6f8f4;color:var(--ink);line-height:1.65}
 .top{background:var(--g);color:white;text-align:center;padding:8px}
 .hero{background:linear-gradient(135deg,#063d30,#08704f);color:white;text-align:center;padding:24px 15px;border-bottom:5px solid var(--gold)}
 .logo{width:118px;height:118px;object-fit:contain;border-radius:50%;background:white;border:3px solid var(--gold);padding:3px}
-h1{font-size:clamp(23px,5vw,36px);margin:10px 0 3px}.slogan{font-size:20px;font-weight:bold;color:#ffe5a3;margin:3px}
+h1{font-size:clamp(23px,5vw,36px);margin:10px 0 3px}
+.slogan{font-size:20px;font-weight:bold;color:#ffe5a3;margin:3px}
 .nav{position:sticky;top:0;z-index:5;background:white;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:8px;box-shadow:0 3px 14px #153b2910}
 .nav a,.nav button{border:0;background:transparent;text-decoration:none;padding:8px 10px;border-radius:8px;color:var(--g);font:inherit;cursor:pointer}
-.wrap{max-width:1050px;margin:auto;padding:20px 14px 50px}.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:20px;margin-bottom:16px;box-shadow:0 5px 18px #12331a08}
-h2{color:var(--g);margin:0 0 12px}.content{white-space:pre-wrap;overflow-wrap:anywhere}
-.field{display:grid;gap:6px;margin:10px 0}.field label{font-weight:650}.field input,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d1;border-radius:9px;font:inherit}.field textarea{min-height:110px}
-.btn{background:var(--g);color:white;border:0;border-radius:9px;padding:11px 16px;font:inherit;cursor:pointer}.btn.alt{background:#edf4ef;color:var(--g);border:1px solid #d6e3d9}
-.status{padding:10px;border-radius:9px;background:#f0f5f1;white-space:pre-wrap;margin-top:10px}.hidden{display:none!important}
+.wrap{max-width:1050px;margin:auto;padding:20px 14px 50px}
+.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:20px;margin-bottom:16px;box-shadow:0 5px 18px #12331a08}
+h2{color:var(--g);margin:0 0 12px}
+.content{white-space:pre-wrap;overflow-wrap:anywhere}
+.field{display:grid;gap:6px;margin:10px 0}
+.field label{font-weight:650}
+.field input,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d1;border-radius:9px;font:inherit}
+.field textarea{min-height:110px}
+.btn{background:var(--g);color:white;border:0;border-radius:9px;padding:11px 16px;font:inherit;cursor:pointer}
+.btn:disabled{opacity:.55}
+.btn.alt{background:#edf4ef;color:var(--g);border:1px solid #d6e3d9}
+.status{padding:10px;border-radius:9px;background:#f0f5f1;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:10px}
+.hidden{display:none!important}
 .adminbar,.actions{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.editor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.editor{border:1px solid var(--line);padding:12px;border-radius:12px}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px}
-.notice{padding:10px 0;border-bottom:1px solid var(--line)}footer{text-align:center;background:#073d30;color:#e8f0e9;padding:22px}
+.editor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.editor{border:1px solid var(--line);padding:12px;border-radius:12px;min-width:0}
+.editor textarea{width:100%;padding:10px;border:1px solid #cfd9d1;border-radius:9px;font:inherit}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+.notice{padding:10px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+footer{text-align:center;background:#073d30;color:#e8f0e9;padding:22px}
+#loginDialog{position:fixed;inset:0;background:#071b16bb;z-index:10;display:grid;place-items:center;padding:15px}
+#loginDialog .panel{width:min(430px,100%)}
+.small{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:7px}
 </style>
 </head>
+
 <body>
 <div class="top">কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর</div>
+
 <header class="hero">
-<img class="logo" src="logo.png" alt="শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশনের লোগো">
-<h1>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</h1><p class="slogan">আলো আসবেই</p><p>সেবা • ভক্তি • মানবকল্যাণ</p>
+<img class="logo" src="logo.png" alt="ফাউন্ডেশনের লোগো">
+<h1>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</h1>
+<p class="slogan">আলো আসবেই</p>
+<p>সেবা • ভক্তি • মানবকল্যাণ</p>
 </header>
+
 <nav class="nav">
-<a href="#home">মূল পাতা</a><a href="#about">পরিচিতি</a><a href="#committee">কমিটি</a><a href="#notices">নোটিশ</a><a href="#activities">কার্যক্রম</a><a href="#gallery">গ্যালারি</a><a href="#contact">যোগাযোগ</a><a href="#apply">আবেদন</a><button id="adminOpen">Admin</button>
+<a href="#home">মূল পাতা</a>
+<a href="#about">পরিচিতি</a>
+<a href="#committee">কমিটি</a>
+<a href="#notices">নোটিশ</a>
+<a href="#activities">কার্যক্রম</a>
+<a href="#gallery">গ্যালারি</a>
+<a href="#contact">যোগাযোগ</a>
+<a href="#apply">আবেদন</a>
+<button id="adminOpen" type="button">Admin</button>
 </nav>
+
 <main class="wrap">
-<section id="home" class="panel"><h2>স্বাগতম</h2><div id="homeText" class="content"></div></section>
-<section id="about" class="panel"><h2>পরিচিতি</h2><div id="aboutText" class="content"></div></section>
-<section id="committee" class="panel"><h2>কমিটি</h2><div id="committeeText" class="content"></div></section>
-<section id="notices" class="panel"><h2>নোটিশ</h2><div id="noticesText" class="content"></div></section>
-<section id="activities" class="panel"><h2>কার্যক্রম</h2><div id="activitiesText" class="content"></div></section>
-<section id="gallery" class="panel"><h2>গ্যালারি</h2><div id="galleryView" class="gallery"></div><div id="galleryEmpty" class="content">ছবি এখনো যোগ করা হয়নি।</div></section>
-<section id="contact" class="panel"><h2>যোগাযোগ</h2><div id="contactText" class="content"></div></section>
-<section id="apply" class="panel"><h2>অনলাইন আবেদন</h2>
+
+<section id="home" class="panel">
+<h2>স্বাগতম</h2><div id="homeText" class="content"></div>
+</section>
+
+<section id="about" class="panel">
+<h2>পরিচিতি</h2><div id="aboutText" class="content"></div>
+</section>
+
+<section id="committee" class="panel">
+<h2>কমিটি</h2><div id="committeeText" class="content"></div>
+</section>
+
+<section id="notices" class="panel">
+<h2>নোটিশ</h2><div id="noticesText" class="content"></div>
+</section>
+
+<section id="activities" class="panel">
+<h2>কার্যক্রম</h2><div id="activitiesText" class="content"></div>
+</section>
+
+<section id="gallery" class="panel">
+<h2>গ্যালারি</h2>
+<div id="galleryView" class="gallery"></div>
+<div id="galleryEmpty" class="content">ছবি এখনো যোগ করা হয়নি।</div>
+</section>
+
+<section id="contact" class="panel">
+<h2>যোগাযোগ</h2><div id="contactText" class="content"></div>
+</section>
+
+<section id="apply" class="panel">
+<h2>অনলাইন আবেদন</h2>
 <form id="applicationForm">
 <div class="field"><label>নাম</label><input id="appName" required maxlength="100"></div>
 <div class="field"><label>মোবাইল নম্বর</label><input id="appPhone" required maxlength="25"></div>
 <div class="field"><label>ঠিকানা</label><input id="appAddress" required maxlength="250"></div>
 <div class="field"><label>আবেদনের বিষয়</label><textarea id="appMessage" required maxlength="2000"></textarea></div>
-<button class="btn">আবেদন পাঠান</button><div id="appStatus" class="status hidden"></div>
-</form></section>
+<button class="btn">আবেদন পাঠান</button>
+<div id="appStatus" class="status hidden"></div>
+</form>
+</section>
+
 <section id="adminPanel" class="panel hidden">
-<div class="adminbar"><div><b>Super Admin Panel</b><div id="adminIdentity"></div></div><button id="logoutBtn" class="btn alt">লগআউট</button></div>
+<div class="adminbar">
+<div>
+<b>Super Admin Panel</b>
+<div id="adminIdentity"></div>
+</div>
+<button id="logoutBtn" class="btn alt" type="button">লগআউট</button>
+</div>
+
 <div id="adminStatus" class="status">যাচাই হচ্ছে…</div>
+
 <div id="editorArea" class="hidden">
 <h2 style="margin-top:18px">ওয়েবসাইটের তথ্য সম্পাদনা</h2>
-<p>প্রতিটি বিভাগের ঘরে লেখা যোগ বা পরিবর্তন করে সংশ্লিষ্ট সংরক্ষণ বাটনে চাপুন। গ্যালারিতে প্রতি লাইনে একটি ছবির সরাসরি URL দিন।</p>
+<p>প্রতিটি বিভাগের লেখা পরিবর্তন করে সংশ্লিষ্ট সংরক্ষণ বাটনে চাপুন। গ্যালারিতে প্রতি লাইনে একটি ছবির সরাসরি HTTPS URL দিন।</p>
 <div class="editor-grid" id="editors"></div>
+
 <h2 style="margin-top:22px">পাসওয়ার্ড পরিবর্তন</h2>
 <div class="field"><label>বর্তমান পাসওয়ার্ড</label><input id="currentPassword" type="password" autocomplete="current-password"></div>
 <div class="field"><label>নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)</label><input id="newPassword" type="password" autocomplete="new-password"></div>
 <div class="field"><label>নতুন পাসওয়ার্ড আবার লিখুন</label><input id="confirmPassword" type="password" autocomplete="new-password"></div>
-<button id="changePassword" class="btn alt" type="button">পাসওয়ার্ড পরিবর্তন</button><div id="passwordStatus" class="small"></div>
-<h2 style="margin-top:22px">প্রাপ্ত আবেদন</h2><button id="loadApps" class="btn alt">আবেদন তালিকা দেখুন</button><div id="applicationsList"></div>
-</div></section>
+<button id="changePassword" class="btn alt" type="button">পাসওয়ার্ড পরিবর্তন</button>
+<div id="passwordStatus" class="small"></div>
+
+<h2 style="margin-top:22px">প্রাপ্ত আবেদন</h2>
+<button id="loadApps" class="btn alt" type="button">আবেদন তালিকা দেখুন</button>
+<div id="applicationsList"></div>
+</div>
+</section>
 </main>
-<footer><b>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</b><div>আলো আসবেই</div><small>কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর</small></footer>
-<div id="loginDialog" class="hidden" style="position:fixed;inset:0;background:#071b16bb;z-index:10;display:grid;place-items:center;padding:15px">
-<div class="panel" style="width:min(430px,100%)"><h2>Super Admin লগইন</h2><form id="loginForm">
-<div class="field"><label>ইমেইল</label><input id="adminEmail" type="email" autocomplete="username" required></div>
-<div class="field"><label>পাসওয়ার্ড</label><input id="adminPass" type="password" autocomplete="current-password" required></div>
-<div class="actions"><button class="btn">লগইন</button><button type="button" id="forgotPass" class="btn alt">পাসওয়ার্ড ভুলে গেছেন?</button><button type="button" id="closeLogin" class="btn alt">বন্ধ</button></div></form><div id="loginStatus" class="status hidden"></div></div></div>
+
+<footer>
+<b>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</b>
+<div>আলো আসবেই</div>
+<small>কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর</small>
+</footer>
+
+<div id="loginDialog" class="hidden">
+<div class="panel">
+<h2>Super Admin লগইন</h2>
+<form id="loginForm">
+<div class="field">
+<label>ইমেইল</label>
+<input id="adminEmail" type="email" autocomplete="username" required>
+</div>
+<div class="field">
+<label>পাসওয়ার্ড</label>
+<input id="adminPass" type="password" autocomplete="current-password" required>
+</div>
+<div class="actions">
+<button class="btn">লগইন</button>
+<button type="button" id="forgotPass" class="btn alt">পাসওয়ার্ড ভুলে গেছেন?</button>
+<button type="button" id="closeLogin" class="btn alt">বন্ধ</button>
+</div>
+</form>
+<div id="loginStatus" class="status hidden"></div>
+</div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <script>
 'use strict';
-const firebaseConfig={apiKey:'AIzaSyDohiPYANaOW_Pm7XeBfRo5Q2ehqLkINNU',authDomain:'radharaman-sanatani-foun-5d5cd.firebaseapp.com',projectId:'radharaman-sanatani-foun-5d5cd',storageBucket:'radharaman-sanatani-foun-5d5cd.firebasestorage.app',messagingSenderId:'336112155496',appId:'1:336112155496:web:f0fcefe38c44c43fd934dd',measurementId:'G-0C1CQZWJTJ'};
+
+const firebaseConfig={
+apiKey:'AIzaSyDohiPYANaOW_Pm7XeBfRo5Q2ehqLkINNU',
+authDomain:'radharaman-sanatani-foun-5d5cd.firebaseapp.com',
+projectId:'radharaman-sanatani-foun-5d5cd',
+storageBucket:'radharaman-sanatani-foun-5d5cd.firebasestorage.app',
+messagingSenderId:'336112155496',
+appId:'1:336112155496:web:f0fcefe38c44c43fd934dd',
+measurementId:'G-0C1CQZWJTJ'
+};
+
 const SUPER_ADMIN_UID='76CG3vV4U8X3PoOh1m66IX9TKY02';
+
 const defaults={
 home:'শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশনের পক্ষ থেকে আপনাকে স্বাগতম। মানবকল্যাণ, শিক্ষা, সংস্কৃতি ও সনাতনী ঐতিহ্য চর্চায় আমরা ঐক্যবদ্ধ।',
 about:'ফাউন্ডেশনের পরিচিতি ও লক্ষ্য-উদ্দেশ্য সম্পর্কে বিস্তারিত তথ্য এখানে প্রকাশিত হবে।',
@@ -86,61 +198,435 @@ activities:'ফাউন্ডেশনের চলমান ও সম্প�
 gallery:'',
 contact:'ঠিকানা: কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর'
 };
-const labels={home:'মূল পাতা',about:'পরিচিতি',committee:'কমিটি',notices:'নোটিশ',activities:'কার্যক্রম',gallery:'গ্যালারি (প্রতি লাইনে একটি ছবির URL)',contact:'যোগাযোগ'};
-const $=id=>document.getElementById(id);let auth,db,currentAdmin=false,cache={...defaults};
-function status(id,msg){$(id).textContent=msg;$(id).classList.remove('hidden')}
-function friendly(e){const c=e&&e.code;if(c==='auth/invalid-credential'||c==='auth/wrong-password')return 'ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।';if(c==='permission-denied')return 'Firestore Rules অনুমতি দেয়নি।';return (e&&e.message)||String(e)}
-function render(){
-for(const k of Object.keys(defaults)){if(k!=='gallery')$(k+'Text').textContent=cache[k]??defaults[k]}
-const urls=(cache.gallery||'').split(/\n/).map(x=>x.trim()).filter(Boolean);
-$('galleryView').innerHTML='';$('galleryEmpty').classList.toggle('hidden',urls.length>0);
-urls.forEach(url=>{if(!/^https:\/\/.+/i.test(url))return;const img=document.createElement('img');img.src=url;img.alt='ফাউন্ডেশনের কার্যক্রমের ছবি';img.loading='lazy';$('galleryView').append(img)});
-}
-async function loadContent(){for(const k of Object.keys(defaults)){try{const s=await db.collection('siteContent').doc(k).get();if(s.exists&&typeof s.data().content==='string')cache[k]=s.data().content}catch(e){console.warn(k,e)}}render()}
-function buildEditors(){
-const root=$('editors');root.innerHTML='';
-Object.keys(defaults).forEach(k=>{
-const wrap=document.createElement('div');wrap.className='editor';
-const label=document.createElement('label');label.textContent=labels[k];label.htmlFor='edit_'+k;
-const area=document.createElement('textarea');area.id='edit_'+k;area.value=cache[k]||'';area.style.minHeight=k==='gallery'?'150px':'130px';
-const btn=document.createElement('button');btn.className='btn';btn.type='button';btn.textContent='সংরক্ষণ করুন';
-const msg=document.createElement('div');msg.className='small';msg.style.marginTop='6px';
-btn.addEventListener('click',async()=>{
-if(!currentAdmin){msg.textContent='Admin অনুমতি নেই।';return}
-btn.disabled=true;msg.textContent='সংরক্ষণ হচ্ছে…';
-try{const value=area.value;await db.collection('siteContent').doc(k).set({content:value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});cache[k]=value;render();msg.textContent='সংরক্ষণ সফল হয়েছে।'}
-catch(e){msg.textContent='সংরক্ষণ হয়নি: '+friendly(e)}finally{btn.disabled=false}
-});
-wrap.append(label,area,btn,msg);root.append(wrap);
-});
-}
-async function verify(user){
-$('adminPanel').classList.remove('hidden');$('adminIdentity').textContent='UID: '+user.uid;
-$('editorArea').classList.add('hidden');status('adminStatus','Super Admin অনুমতি যাচাই হচ্ছে…');
-try{
-if(user.uid!==SUPER_ADMIN_UID)throw new Error('এই অ্যাকাউন্টের UID Super Admin UID-এর সঙ্গে মেলে না।');
-const snap=await db.collection('admins').doc(user.uid).get();if(!snap.exists)throw new Error('admins/'+user.uid+' Document পাওয়া যায়নি।');
-const d=snap.data();if(d.active!==true||d.role!=='super_admin')throw new Error('Admin Document-এর role বা active মান সঠিক নয়।');
-currentAdmin=true;status('adminStatus','Super Admin অনুমোদন সফল।');await loadContent();buildEditors();$('editorArea').classList.remove('hidden');
-}catch(e){currentAdmin=false;status('adminStatus','Admin যাচাই ব্যর্থ: '+friendly(e))}
-}
-$('adminOpen').onclick=()=>{if(currentAdmin){$('adminPanel').classList.remove('hidden');$('adminPanel').scrollIntoView({behavior:'smooth'})}else{$('loginDialog').classList.remove('hidden');$('loginStatus').classList.add('hidden')}};
-$('closeLogin').onclick=()=>$('loginDialog').classList.add('hidden');
-$('loginForm').onsubmit=async e=>{e.preventDefault();status('loginStatus','লগইন হচ্ছে…');try{await auth.signInWithEmailAndPassword($('adminEmail').value.trim(),$('adminPass').value);$('loginDialog').classList.add('hidden')}catch(err){status('loginStatus','লগইন ব্যর্থ: '+friendly(err))}};
-$('forgotPass').onclick=async()=>{const email=$('adminEmail').value.trim();if(!email){status('loginStatus','আগে ইমেইল লিখুন।');return}try{await auth.sendPasswordResetEmail(email);status('loginStatus','পাসওয়ার্ড রিসেট লিংক ইমেইলে পাঠানো হয়েছে।')}catch(e){status('loginStatus','রিসেট পাঠানো যায়নি: '+friendly(e))}};
-$('logoutBtn').onclick=async()=>{await auth.signOut();currentAdmin=false;$('adminPanel').classList.add('hidden')};
-$('applicationForm').onsubmit=async e=>{e.preventDefault();try{await db.collection('applications').add({name:$('appName').value.trim(),phone:$('appPhone').value.trim(),address:$('appAddress').value.trim(),message:$('appMessage').value.trim(),createdAt:firebase.firestore.FieldValue.serverTimestamp()});$('applicationForm').reset();status('appStatus','আপনার আবেদন জমা হয়েছে।')}catch(err){status('appStatus','আবেদন পাঠানো যায়নি: '+friendly(err))}};
-$('changePassword').onclick=async()=>{
-const user=auth.currentUser,oldPass=$('currentPassword').value,newPass=$('newPassword').value,confirm=$('confirmPassword').value;
-const out=$('passwordStatus');out.textContent='';
-if(!user){out.textContent='প্রথমে লগইন করুন।';return}
-if(!oldPass||!newPass){out.textContent='সব পাসওয়ার্ডের ঘর পূরণ করুন।';return}
-if(newPass.length<6){out.textContent='নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';return}
-if(newPass!==confirm){out.textContent='নতুন পাসওয়ার্ড দুটি মেলেনি।';return}
-try{const cred=firebase.auth.EmailAuthProvider.credential(user.email,oldPass);await user.reauthenticateWithCredential(cred);await user.updatePassword(newPass);out.textContent='পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে।';$('currentPassword').value='';$('newPassword').value='';$('confirmPassword').value=''}
-catch(e){out.textContent='পাসওয়ার্ড পরিবর্তন হয়নি: '+friendly(e)}
+
+const labels={
+home:'মূল পাতা',
+about:'পরিচিতি',
+committee:'কমিটি',
+notices:'নোটিশ',
+activities:'কার্যক্রম',
+gallery:'গ্যালারি (প্রতি লাইনে একটি ছবির URL)',
+contact:'যোগাযোগ'
 };
-$('loadApps').onclick=async()=>{const box=$('applicationsList');box.textContent='লোড হচ্ছে…';try{const snap=await db.collection('applications').orderBy('createdAt','desc').limit(100).get();box.innerHTML='';if(snap.empty){box.textContent='কোনো আবেদন নেই।';return}snap.forEach(doc=>{const d=doc.data(),p=document.createElement('p');p.className='notice';p.textContent=[d.name,d.phone,d.address,d.message].filter(Boolean).join(' | ');box.append(p)})}catch(e){box.textContent='আবেদন লোড হয়নি: '+friendly(e)}};
-try{firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();loadContent();auth.onAuthStateChanged(u=>{if(u)verify(u);else{currentAdmin=false;$('adminPanel').classList.add('hidden')}})}catch(e){console.error(e)}
+
+const $=id=>document.getElementById(id);
+
+let auth,db;
+let currentAdmin=false;
+let verifying=false;
+let cache={...defaults};
+
+function status(id,msg){
+$(id).textContent=msg;
+$(id).classList.remove('hidden');
+}
+
+function friendly(e){
+const c=e&&e.code;
+if(c==='auth/invalid-credential'||c==='auth/wrong-password')
+return 'ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।';
+if(c==='permission-denied'||c==='firestore/permission-denied')
+return 'Firestore Rules অনুমতি দেয়নি।';
+if(c==='unavailable')
+return 'Firebase সার্ভার বর্তমানে পাওয়া যাচ্ছে না।';
+if(c==='auth/network-request-failed')
+return 'ইন্টারনেট সংযোগ পরীক্ষা করুন।';
+return (e&&e.message)||String(e);
+}
+
+function render(){
+for(const k of Object.keys(defaults)){
+if(k!=='gallery'){
+$(k+'Text').textContent=cache[k]??defaults[k];
+}
+}
+
+const urls=(cache.gallery||'')
+.split(/\n/)
+.map(x=>x.trim())
+.filter(Boolean);
+
+$('galleryView').innerHTML='';
+$('galleryEmpty').classList.toggle('hidden',urls.length>0);
+
+urls.forEach(url=>{
+if(!/^https:\/\/.+/i.test(url))return;
+const img=document.createElement('img');
+img.src=url;
+img.alt='ফাউন্ডেশনের কার্যক্রমের ছবি';
+img.loading='lazy';
+$('galleryView').append(img);
+});
+}
+
+async function loadContent(){
+for(const k of Object.keys(defaults)){
+try{
+const s=await db.collection('siteContent').doc(k).get();
+if(s.exists&&typeof s.data().content==='string'){
+cache[k]=s.data().content;
+}
+}catch(e){
+console.error('CONTENT LOAD ERROR:',k,e);
+}
+}
+render();
+}
+
+function buildEditors(){
+const root=$('editors');
+root.innerHTML='';
+
+Object.keys(defaults).forEach(k=>{
+const wrap=document.createElement('div');
+wrap.className='editor';
+
+const label=document.createElement('label');
+label.textContent=labels[k];
+label.htmlFor='edit_'+k;
+
+const area=document.createElement('textarea');
+area.id='edit_'+k;
+area.value=cache[k]||'';
+area.style.minHeight=k==='gallery'?'150px':'130px';
+
+const btn=document.createElement('button');
+btn.className='btn';
+btn.type='button';
+btn.textContent='সংরক্ষণ করুন';
+
+const msg=document.createElement('div');
+msg.className='small';
+
+btn.addEventListener('click',async()=>{
+if(!currentAdmin){
+msg.textContent='Admin অনুমতি নেই।';
+return;
+}
+
+btn.disabled=true;
+msg.textContent='সংরক্ষণ হচ্ছে…';
+
+try{
+const value=area.value;
+await db.collection('siteContent').doc(k).set({
+content:value,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+},{merge:true});
+
+cache[k]=value;
+render();
+msg.textContent='সংরক্ষণ সফল হয়েছে।';
+
+}catch(e){
+console.error('SAVE ERROR:',e);
+msg.textContent='সংরক্ষণ হয়নি: '+friendly(e);
+}finally{
+btn.disabled=false;
+}
+});
+
+wrap.append(label,area,btn,msg);
+root.append(wrap);
+});
+}
+
+/* Super Admin verification */
+
+async function verify(user){
+if(verifying)return;
+verifying=true;
+currentAdmin=false;
+
+$('adminPanel').classList.remove('hidden');
+$('adminIdentity').textContent='UID: '+user.uid;
+$('editorArea').classList.add('hidden');
+
+status('adminStatus','Super Admin যাচাই হচ্ছে…');
+
+try{
+
+if(user.uid!==SUPER_ADMIN_UID){
+throw new Error(
+'UID মিলছে না। লগইন UID: '+user.uid+
+' | নির্ধারিত UID: '+SUPER_ADMIN_UID
+);
+}
+
+const ref=db.collection('admins').doc(user.uid);
+const snap=await ref.get({source:'server'});
+
+if(!snap.exists){
+throw new Error(
+'মূল admins Collection-এ এই UID-এর Document পাওয়া যায়নি: '+user.uid
+);
+}
+
+const d=snap.data()||{};
+
+console.log('ADMIN DOCUMENT:',d);
+console.log('DOCUMENT ID:',snap.id);
+console.log('ROLE:',d.role,'TYPE:',typeof d.role);
+console.log('ACTIVE:',d.active,'TYPE:',typeof d.active);
+
+if(snap.id!==SUPER_ADMIN_UID){
+throw new Error('Document ID সঠিক নয়।');
+}
+
+if(typeof d.role!=='string'||d.role.trim()!=='super_admin'){
+throw new Error(
+'Role ভুল। পাওয়া গেছে: '+JSON.stringify(d.role)+
+' | Type: '+typeof d.role
+);
+}
+
+if(d.active!==true){
+throw new Error(
+'Active ভুল। পাওয়া গেছে: '+JSON.stringify(d.active)+
+' | Type: '+typeof d.active
+);
+}
+
+currentAdmin=true;
+
+status('adminStatus','Super Admin অনুমোদন সফল।');
+
+await loadContent();
+buildEditors();
+
+$('editorArea').classList.remove('hidden');
+$('adminPanel').scrollIntoView({behavior:'smooth'});
+
+}catch(e){
+currentAdmin=false;
+console.error('ADMIN VERIFY ERROR:',e);
+status('adminStatus','Admin যাচাই ব্যর্থ: '+friendly(e));
+
+}finally{
+verifying=false;
+}
+}
+
+/* Admin button */
+
+$('adminOpen').onclick=()=>{
+const user=auth.currentUser;
+
+if(user){
+if(currentAdmin){
+$('adminPanel').classList.remove('hidden');
+$('adminPanel').scrollIntoView({behavior:'smooth'});
+}else{
+verify(user);
+}
+}else{
+$('loginDialog').classList.remove('hidden');
+$('loginStatus').classList.add('hidden');
+}
+};
+
+$('closeLogin').onclick=()=>{
+$('loginDialog').classList.add('hidden');
+};
+
+/* Login */
+
+$('loginForm').onsubmit=async e=>{
+e.preventDefault();
+
+status('loginStatus','লগইন হচ্ছে…');
+
+try{
+await auth.signInWithEmailAndPassword(
+$('adminEmail').value.trim(),
+$('adminPass').value
+);
+
+$('loginDialog').classList.add('hidden');
+
+}catch(err){
+console.error('LOGIN ERROR:',err);
+status('loginStatus','লগইন ব্যর্থ: '+friendly(err));
+}
+};
+
+/* Password reset */
+
+$('forgotPass').onclick=async()=>{
+const email=$('adminEmail').value.trim();
+
+if(!email){
+status('loginStatus','আগে ইমেইল লিখুন।');
+return;
+}
+
+try{
+await auth.sendPasswordResetEmail(email);
+status('loginStatus','পাসওয়ার্ড রিসেট লিংক ইমেইলে পাঠানো হয়েছে।');
+}catch(e){
+status('loginStatus','রিসেট পাঠানো যায়নি: '+friendly(e));
+}
+};
+
+/* Authentication state */
+
+auth.onAuthStateChanged(user=>{
+if(user){
+verify(user);
+}else{
+currentAdmin=false;
+verifying=false;
+$('adminPanel').classList.add('hidden');
+$('editorArea').classList.add('hidden');
+}
+});
+
+/* Logout */
+
+$('logoutBtn').onclick=async()=>{
+try{
+await auth.signOut();
+currentAdmin=false;
+$('adminPanel').classList.add('hidden');
+$('loginDialog').classList.add('hidden');
+}catch(e){
+status('adminStatus','লগআউট হয়নি: '+friendly(e));
+}
+};
+
+/* Public application form */
+
+$('applicationForm').onsubmit=async e=>{
+e.preventDefault();
+
+try{
+await db.collection('applications').add({
+name:$('appName').value.trim(),
+phone:$('appPhone').value.trim(),
+address:$('appAddress').value.trim(),
+message:$('appMessage').value.trim(),
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+
+$('applicationForm').reset();
+status('appStatus','আপনার আবেদন জমা হয়েছে।');
+
+}catch(err){
+console.error('APPLICATION ERROR:',err);
+status('appStatus','আবেদন পাঠানো যায়নি: '+friendly(err));
+}
+};
+
+/* Password change */
+
+$('changePassword').onclick=async()=>{
+const user=auth.currentUser;
+const oldPass=$('currentPassword').value;
+const newPass=$('newPassword').value;
+const confirm=$('confirmPassword').value;
+const out=$('passwordStatus');
+
+out.textContent='';
+
+if(!currentAdmin){
+out.textContent='Super Admin অনুমতি প্রয়োজন।';
+return;
+}
+
+if(!user){
+out.textContent='প্রথমে লগইন করুন।';
+return;
+}
+
+if(!oldPass||!newPass||!confirm){
+out.textContent='সব পাসওয়ার্ডের ঘর পূরণ করুন।';
+return;
+}
+
+if(newPass.length<6){
+out.textContent='নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';
+return;
+}
+
+if(newPass!==confirm){
+out.textContent='নতুন পাসওয়ার্ড দুটি মেলেনি।';
+return;
+}
+
+try{
+const cred=firebase.auth.EmailAuthProvider.credential(
+user.email,oldPass
+);
+
+await user.reauthenticateWithCredential(cred);
+await user.updatePassword(newPass);
+
+out.textContent='পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে।';
+
+$('currentPassword').value='';
+$('newPassword').value='';
+$('confirmPassword').value='';
+
+}catch(e){
+out.textContent='পাসওয়ার্ড পরিবর্তন হয়নি: '+friendly(e);
+}
+};
+
+/* Application list */
+
+$('loadApps').onclick=async()=>{
+const box=$('applicationsList');
+box.textContent='লোড হচ্ছে…';
+
+if(!currentAdmin){
+box.textContent='Super Admin অনুমতি প্রয়োজন।';
+return;
+}
+
+try{
+const snap=await db.collection('applications')
+.orderBy('createdAt','desc')
+.limit(100)
+.get();
+
+box.innerHTML='';
+
+if(snap.empty){
+box.textContent='কোনো আবেদন নেই।';
+return;
+}
+
+snap.forEach(doc=>{
+const d=doc.data();
+const p=document.createElement('p');
+p.className='notice';
+p.textContent=[
+d.name,d.phone,d.address,d.message
+].filter(Boolean).join(' | ');
+box.append(p);
+});
+
+}catch(e){
+box.textContent='আবেদন লোড হয়নি: '+friendly(e);
+}
+};
+
+/* Firebase initialization */
+
+try{
+if(!firebase.apps.length){
+firebase.initializeApp(firebaseConfig);
+}
+
+auth=firebase.auth();
+db=firebase.firestore();
+
+loadContent();
+
+}catch(e){
+console.error('FIREBASE INITIALIZATION ERROR:',e);
+status('adminStatus','Firebase চালু হয়নি: '+friendly(e));
+}
 </script>
-</body></html>
+</body>
+</html>
