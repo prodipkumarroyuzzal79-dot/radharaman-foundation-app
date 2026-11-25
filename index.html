@@ -3,127 +3,37 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#075b36">
 <title>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</title>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f4f7f3;
- color:#173c2b;
-}
-header{
- background:linear-gradient(135deg,#06472c,#087343);
- color:white;
- text-align:center;
- padding:28px 12px;
-}
-.logo{font-size:45px}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f3;color:#173c2b}
+header{background:linear-gradient(135deg,#06472c,#087343);color:white;text-align:center;padding:25px 12px}
+.logo{font-size:42px}
 header h2{margin:8px 0}
-.slogan{
- font-size:24px;
- font-weight:bold;
- color:#ffe49a;
- margin:12px;
-}
-nav{
- display:flex;
- flex-wrap:wrap;
- justify-content:center;
- background:#063d27;
-}
-nav button{
- background:none;
- border:0;
- color:white;
- padding:13px 12px;
- font-size:14px;
- cursor:pointer;
-}
+.slogan{font-size:24px;font-weight:bold;color:#ffe49a;margin:12px}
+nav{display:flex;flex-wrap:wrap;justify-content:center;background:#063d27}
+nav button{background:none;border:0;color:white;padding:12px 10px;font-size:14px;cursor:pointer}
 nav button:hover{background:#087343}
-main{
- padding:15px;
- max-width:900px;
- margin:auto;
-}
-.welcome{
- background:#e2f1e5;
- padding:25px 15px;
- border-radius:12px;
- text-align:center;
-}
+main{padding:15px;max-width:950px;margin:auto}
+.welcome{background:#e2f1e5;padding:25px 15px;border-radius:12px;text-align:center}
 h3{color:#087343}
-.grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
-}
-.item{
- background:white;
- padding:20px 8px;
- text-align:center;
- border-radius:12px;
- box-shadow:0 2px 7px #0001;
- cursor:pointer;
-}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.item{background:white;padding:20px 8px;text-align:center;border-radius:12px;box-shadow:0 2px 7px #0001;cursor:pointer}
 .item span{font-size:30px}
 .item p{margin:8px 0 0}
-section{
- background:white;
- margin:15px 0;
- padding:20px;
- border-radius:12px;
-}
-input,textarea{
- display:block;
- width:100%;
- padding:12px;
- margin:8px 0;
- border:1px solid #bbb;
- border-radius:6px;
- font-size:15px;
-}
-.action{
- padding:12px 18px;
- background:#075b36;
- color:white;
- border:0;
- border-radius:6px;
- cursor:pointer;
- margin:5px 3px;
-}
-#adminArea{
- background:#e8f3eb;
- border:1px solid #c6ddcb;
-}
-#adminDashboard{
- display:none;
- background:white;
- padding:15px;
- border-radius:8px;
- margin-top:15px;
-}
-#loginStatus{
- font-weight:bold;
- overflow-wrap:anywhere;
-}
-footer{
- background:#075b36;
- color:white;
- text-align:center;
- padding:20px;
- margin-top:20px;
-}
-@media(max-width:480px){
- nav button{padding:11px 8px;font-size:13px}
- .slogan{font-size:21px}
-}
+section{background:white;margin:15px 0;padding:20px;border-radius:12px}
+.page[hidden]{display:none}
+input,textarea,select{display:block;width:100%;padding:12px;margin:8px 0;border:1px solid #bbb;border-radius:6px;font-size:15px}
+textarea{min-height:110px}
+.action{padding:12px 18px;background:#075b36;color:white;border:0;border-radius:6px;cursor:pointer;margin:5px 3px}
+.status{font-weight:bold;overflow-wrap:anywhere}
+#adminDashboard{display:none;background:#e8f3eb;padding:15px;border-radius:8px;margin-top:15px}
+footer{background:#075b36;color:white;text-align:center;padding:20px;margin-top:20px}
+@media(max-width:480px){nav button{padding:10px 7px;font-size:12px}.slogan{font-size:21px}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -142,108 +52,107 @@ footer{
  <button onclick="showPage('gallery')">ছবি</button>
  <button onclick="showPage('contact')">যোগাযোগ</button>
  <button onclick="showPage('application')">আবেদন</button>
+ <button onclick="showPage('firebase')">Firebase সংযোগ</button>
+ <button onclick="showPage('adminArea')">Super Admin</button>
 </nav>
 
 <main>
-
 <div id="home" class="page">
  <div class="welcome">
   <h3>স্বাগতম</h3>
   <h2>আলো আসবেই</h2>
   <p>সেবা, ঐক্য, মানবতা ও সনাতনী চেতনায় আমাদের পথচলা।</p>
-  <p>ফাউন্ডেশনের সকল কার্যক্রম ও তথ্য এখানে পাওয়া যাবে।</p>
+  <p>ফাউন্ডেশনের সকল তথ্য ও কার্যক্রম এখানে পাওয়া যাবে।</p>
  </div>
-
  <h3>আমাদের বিভাগসমূহ</h3>
-
  <div class="grid">
-  <div class="item" onclick="showPage('about')">
-   <span>🏛️</span><p>পরিচিতি</p>
-  </div>
-  <div class="item" onclick="showPage('committee')">
-   <span>👥</span><p>কমিটি</p>
-  </div>
-  <div class="item" onclick="showPage('notice')">
-   <span>📢</span><p>নোটিশ</p>
-  </div>
-  <div class="item" onclick="showPage('activity')">
-   <span>🌿</span><p>কার্যক্রম</p>
-  </div>
-  <div class="item" onclick="showPage('gallery')">
-   <span>📸</span><p>ছবি</p>
-  </div>
-  <div class="item" onclick="showPage('contact')">
-   <span>☎️</span><p>যোগাযোগ</p>
-  </div>
-  <div class="item" onclick="showPage('application')">
-   <span>📄</span><p>আবেদন</p>
-  </div>
+  <div class="item" onclick="showPage('about')"><span>🏛️</span><p>পরিচিতি</p></div>
+  <div class="item" onclick="showPage('committee')"><span>👥</span><p>কমিটি</p></div>
+  <div class="item" onclick="showPage('notice')"><span>📢</span><p>নোটিশ</p></div>
+  <div class="item" onclick="showPage('activity')"><span>🌿</span><p>কার্যক্রম</p></div>
+  <div class="item" onclick="showPage('gallery')"><span>📸</span><p>ছবি</p></div>
+  <div class="item" onclick="showPage('contact')"><span>☎️</span><p>যোগাযোগ</p></div>
+  <div class="item" onclick="showPage('application')"><span>📄</span><p>আবেদন</p></div>
+  <div class="item" onclick="showPage('firebase')"><span>🔗</span><p>Firebase সংযোগ</p></div>
+  <div class="item" onclick="showPage('adminArea')"><span>🔐</span><p>Super Admin</p></div>
  </div>
 </div>
 
 <section id="about" class="page" hidden>
  <h3>ফাউন্ডেশন পরিচিতি</h3>
- <p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন একটি সনাতনী সামাজিক, সাংস্কৃতিক ও মানবকল্যাণমূলক সংগঠন।</p>
- <p><strong>আমাদের স্লোগান: আলো আসবেই</strong></p>
- <p>সেবা, ঐক্য, মানবতা ও সনাতনী চেতনার বিকাশ আমাদের মূল লক্ষ্য।</p>
+ <p id="aboutText">শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন একটি সনাতনী সামাজিক, সাংস্কৃতিক ও মানবকল্যাণমূলক সংগঠন। সেবা, ঐক্য, মানবতা ও সনাতনী চেতনার বিকাশ আমাদের লক্ষ্য।</p>
 </section>
 
 <section id="committee" class="page" hidden>
- <h3>সাংগঠনিক কাঠামো</h3>
- <p>ফাউন্ডেশনের স্থায়ী পরিষদ, পরিচালনা পরিষদ, উপদেষ্টা পরিষদ এবং বিভিন্ন উপকমিটির তথ্য এখানে প্রকাশ করা হবে।</p>
+ <h3>কমিটি</h3>
+ <p id="committeeText">ফাউন্ডেশনের কমিটির তথ্য এখানে প্রকাশ করা হবে।</p>
 </section>
 
 <section id="notice" class="page" hidden>
- <h3>নোটিশ ও সংবাদ</h3>
- <p>ফাউন্ডেশনের সকল বিজ্ঞপ্তি, ঘোষণা ও সংবাদ এখানে প্রকাশ করা হবে।</p>
+ <h3>নোটিশ</h3>
+ <p id="noticeText">ফাউন্ডেশনের বিজ্ঞপ্তি ও ঘোষণা এখানে প্রকাশ করা হবে।</p>
 </section>
 
 <section id="activity" class="page" hidden>
- <h3>ফাউন্ডেশনের কার্যক্রম</h3>
- <p>ফাউন্ডেশনের সামাজিক, ধর্মীয়, সাংস্কৃতিক, শিক্ষামূলক ও মানবকল্যাণমূলক কার্যক্রমের তথ্য এখানে প্রকাশ করা হবে।</p>
+ <h3>কার্যক্রম</h3>
+ <p id="activityText">ফাউন্ডেশনের সামাজিক, ধর্মীয়, সাংস্কৃতিক ও মানবকল্যাণমূলক কার্যক্রম এখানে প্রকাশ করা হবে।</p>
 </section>
 
 <section id="gallery" class="page" hidden>
- <h3>ছবি ও অনুষ্ঠান</h3>
- <p>ফাউন্ডেশনের বিভিন্ন অনুষ্ঠান, সামাজিক কার্যক্রম ও ছবি এখানে প্রকাশ করা হবে।</p>
+ <h3>ছবি</h3>
+ <p id="galleryText">ফাউন্ডেশনের অনুষ্ঠান ও কার্যক্রমের ছবি এখানে প্রকাশ করা হবে।</p>
 </section>
 
 <section id="contact" class="page" hidden>
  <h3>যোগাযোগ</h3>
- <p>শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</p>
+ <p id="contactText">শ্রী শ্রী রাধারমন সনাতনী ফাউন্ডেশন</p>
  <p>ঠিকানা: কিসামত ভূটিয়ান, পলাশবাড়ী, নীলফামারী সদর।</p>
 </section>
 
 <section id="application" class="page" hidden>
  <h3>আবেদন</h3>
- <p>সদস্যপদ অথবা অন্যান্য বিষয়ে আবেদন করতে নিচের তথ্য পূরণ করুন।</p>
+ <p>সদস্যপদ অথবা অন্যান্য বিষয়ে আবেদন করতে তথ্য পূরণ করুন।</p>
  <form id="applicationForm">
   <input id="appName" type="text" placeholder="আবেদনকারীর নাম" required>
   <input id="appPhone" type="tel" placeholder="মোবাইল নম্বর" required>
   <input id="appAddress" type="text" placeholder="ঠিকানা" required>
-  <textarea id="appDetails" rows="4" placeholder="আবেদনের বিষয় লিখুন" required></textarea>
+  <textarea id="appDetails" placeholder="আবেদনের বিষয় লিখুন" required></textarea>
   <button class="action" type="submit">আবেদন জমা দিন</button>
  </form>
- <p id="applicationStatus"></p>
+ <p id="applicationStatus" class="status"></p>
 </section>
 
-<section id="adminArea">
- <h3>Super Admin লগইন</h3>
- <input id="adminEmail" type="email" placeholder="অ্যাডমিন ইমেইল">
- <input id="adminPass" type="password" placeholder="পাসওয়ার্ড">
+<section id="firebase" class="page" hidden>
+ <h3>Firebase সংযোগ</h3>
+ <p>ফাউন্ডেশনের তথ্য সংরক্ষণ ব্যবস্থার সংযোগের অবস্থা:</p>
+ <p id="firebaseStatus" class="status">সংযোগ যাচাই হচ্ছে...</p>
+</section>
 
+<section id="adminArea" class="page" hidden>
+ <h3>Super Admin লগইন</h3>
+ <input id="adminEmail" type="email" placeholder="অ্যাডমিন ইমেইল" autocomplete="username">
+ <input id="adminPass" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password">
  <button class="action" type="button" onclick="adminLogin()">লগইন</button>
  <button class="action" type="button" onclick="adminLogout()">লগআউট</button>
-
- <p id="loginStatus">লগইন করা হয়নি</p>
+ <p id="loginStatus" class="status">লগইন করা হয়নি।</p>
 
  <div id="adminDashboard">
   <h3>Super Admin প্যানেল</h3>
-  <p>Super Admin হিসেবে প্রবেশ সফল হয়েছে।</p>
-  <p>পরবর্তী ধাপে এখান থেকে ফাউন্ডেশনের তথ্য পরিচালনার সুবিধা যুক্ত করা হবে।</p>
+  <p>আপনি Super Admin হিসেবে প্রবেশ করেছেন।</p>
+  <p>নিচের বিভাগ নির্বাচন করে প্রকাশিত তথ্য সম্পাদনা করুন।</p>
+  <select id="editSection">
+   <option value="about">পরিচিতি</option>
+   <option value="committee">কমিটি</option>
+   <option value="notice">নোটিশ</option>
+   <option value="activity">কার্যক্রম</option>
+   <option value="gallery">ছবি</option>
+   <option value="contact">যোগাযোগ</option>
+  </select>
+  <textarea id="editContent" placeholder="নির্বাচিত বিভাগের তথ্য লিখুন"></textarea>
+  <button class="action" onclick="saveContent()">তথ্য সংরক্ষণ করুন</button>
+  <p id="saveStatus" class="status"></p>
  </div>
 </section>
-
 </main>
 
 <footer>
@@ -257,7 +166,6 @@ footer{
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
 <script>
-// Firebase Connection
 const firebaseConfig = {
  apiKey: "AIzaSyDohiPYANaOW_Pm7XeBfRo5Q2ehqLkINNU",
  authDomain: "radharaman-sanatani-foun-5d5cd.firebaseapp.com",
@@ -267,101 +175,155 @@ const firebaseConfig = {
  appId: "1:336112155496:web:f0fcefe38c44c43fd934dd"
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+let auth;
+let db;
+let currentAdmin = null;
 
-// Page Navigation
+try {
+ firebase.initializeApp(firebaseConfig);
+ auth = firebase.auth();
+ db = firebase.firestore();
+ document.getElementById("firebaseStatus").textContent =
+  "Firebase SDK চালু হয়েছে। ডেটাবেস সংযোগ যাচাই করা হবে।";
+} catch(error) {
+ document.getElementById("firebaseStatus").textContent =
+  "Firebase চালু করা যায়নি: " + error.message;
+}
+
 function showPage(id){
- document.querySelectorAll(".page").forEach(page=>{
-  page.hidden = true;
- });
- const selected = document.getElementById(id);
- if(selected) selected.hidden = false;
+ document.querySelectorAll(".page").forEach(page=>page.hidden=true);
+ const selected=document.getElementById(id);
+ if(selected) selected.hidden=false;
  window.scrollTo(0,0);
 }
 
-// Super Admin Login
 async function adminLogin(){
-async function adminLogin() {
-  const email = document.getElementById("adminEmail").value.trim();
-  const password = document.getElementById("adminPass").value;
-  const status = document.getElementById("loginStatus");
+ const email=document.getElementById("adminEmail").value.trim();
+ const password=document.getElementById("adminPass").value;
+ const status=document.getElementById("loginStatus");
+ const dashboard=document.getElementById("adminDashboard");
 
-  try {
-    status.textContent = "যাচাই চলছে...";
+ dashboard.style.display="none";
 
-    const result = await auth.signInWithEmailAndPassword(email, password);
-    const uid = result.user.uid;
+ if(!email || !password){
+  status.textContent="ইমেইল ও পাসওয়ার্ড লিখুন।";
+  return;
+ }
 
-    const doc = await db.collection("admins").doc(uid).get();
-
-    if (!doc.exists) {
-      status.textContent = "সমস্যা: admins-এ আপনার UID-এর Document পাওয়া যায়নি। UID: " + uid;
-      return;
-    }
-
-    const data = doc.data();
-
-    if (data.role !== "super_admin") {
-      status.textContent = "সমস্যা: role ভুল। পাওয়া গেছে: " + data.role;
-      return;
-    }
-
-    if (data.active !== true) {
-      status.textContent = "সমস্যা: active Boolean true নয়।";
-      return;
-    }
-
-    status.textContent = "Super Admin হিসেবে প্রবেশ সফল!";
-    
-  } catch (error) {
-    status.textContent = "ত্রুটি: " + error.code + " — " + error.message;
-  }
-}
  try{
-  status.textContent = "লগইন যাচাই হচ্ছে...";
-  const result = await auth.signInWithEmailAndPassword(email,password);
-  const uid = result.user.uid;
-  const adminDoc = await db.collection("admins").doc(uid).get();
+  status.textContent="লগইন যাচাই হচ্ছে...";
+  const result=await auth.signInWithEmailAndPassword(email,password);
+  const uid=result.user.uid;
+  const adminDoc=await db.collection("admins").doc(uid).get();
 
-  if(adminDoc.exists &&
-     adminDoc.data().role === "super_admin" &&
-     adminDoc.data().active === true){
-
-   status.textContent = "Super Admin হিসেবে প্রবেশ সফল!";
-   document.getElementById("adminDashboard").style.display = "block";
-
-  }else{
-   await auth.signOut();
-   status.textContent = "আপনার Admin অনুমতি পাওয়া যায়নি।";
-   document.getElementById("adminDashboard").style.display = "none";
+  if(!adminDoc.exists ||
+     adminDoc.data().role!=="super_admin" ||
+     adminDoc.data().active!==true){
+    await auth.signOut();
+    status.textContent="এই অ্যাকাউন্টের Super Admin অনুমতি নেই।";
+    return;
   }
 
+  currentAdmin=result.user;
+  status.textContent="Super Admin হিসেবে প্রবেশ সফল!";
+  dashboard.style.display="block";
+  await loadContent();
  }catch(error){
-  status.textContent = "লগইন সমস্যা: " + error.code;
+  status.textContent="লগইন সমস্যা: "+error.code+" — "+error.message;
  }
 }
 
-// Super Admin Logout
 async function adminLogout(){
  try{
-  await auth.signOut();
-  document.getElementById("loginStatus").textContent = "লগআউট হয়েছে।";
-  document.getElementById("adminDashboard").style.display = "none";
+  if(auth) await auth.signOut();
+  currentAdmin=null;
+  document.getElementById("adminDashboard").style.display="none";
+  document.getElementById("loginStatus").textContent="লগআউট হয়েছে।";
  }catch(error){
-  document.getElementById("loginStatus").textContent =
-   "লগআউট সমস্যা: " + error.code;
+  document.getElementById("loginStatus").textContent="লগআউট সমস্যা: "+error.message;
  }
 }
 
-// Application Form
-document.getElementById("applicationForm").addEventListener("submit",function(event){
- event.preventDefault();
- document.getElementById("applicationStatus").textContent =
-  "আবেদন গ্রহণের ব্যবস্থা এখনো চালু হয়নি। অনুগ্রহ করে পরে চেষ্টা করুন।";
-});
-</script>
+async function saveContent(){
+ if(!currentAdmin){
+  document.getElementById("saveStatus").textContent="আগে Super Admin হিসেবে লগইন করুন।";
+  return;
+ }
 
+ const key=document.getElementById("editSection").value;
+ const value=document.getElementById("editContent").value.trim();
+
+ if(!value){
+  document.getElementById("saveStatus").textContent="তথ্য লিখুন।";
+  return;
+ }
+
+ try{
+  await db.collection("siteContent").doc(key).set({
+   content:value,
+   updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+   updatedBy:currentAdmin.uid
+  });
+  document.getElementById(key+"Text").textContent=value;
+  document.getElementById("saveStatus").textContent="তথ্য সংরক্ষণ হয়েছে।";
+ }catch(error){
+  document.getElementById("saveStatus").textContent=
+   "সংরক্ষণ করা যায়নি: "+error.code+" — "+error.message;
+ }
+}
+
+async function loadContent(){
+ const keys=["about","committee","notice","activity","gallery","contact"];
+ for(const key of keys){
+  try{
+   const doc=await db.collection("siteContent").doc(key).get();
+   if(doc.exists && doc.data().content){
+    document.getElementById(key+"Text").textContent=doc.data().content;
+   }
+  }catch(error){
+   console.log("তথ্য পড়া যায়নি:",key,error);
+  }
+ }
+}
+
+document.getElementById("editSection").addEventListener("change",async function(){
+ const key=this.value;
+ const area=document.getElementById("editContent");
+ area.value=document.getElementById(key+"Text").textContent;
+ try{
+  const doc=await db.collection("siteContent").doc(key).get();
+  if(doc.exists) area.value=doc.data().content || "";
+ }catch(error){}
+});
+
+document.getElementById("applicationForm").addEventListener("submit",async function(event){
+ event.preventDefault();
+ const status=document.getElementById("applicationStatus");
+ status.textContent="আবেদন জমা হচ্ছে...";
+
+ try{
+  await db.collection("applications").add({
+   name:document.getElementById("appName").value.trim(),
+   phone:document.getElementById("appPhone").value.trim(),
+   address:document.getElementById("appAddress").value.trim(),
+   details:document.getElementById("appDetails").value.trim(),
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+  status.textContent="আপনার আবেদন সফলভাবে জমা হয়েছে।";
+  this.reset();
+ }catch(error){
+  status.textContent="আবেদন জমা হয়নি: "+error.code+" — "+error.message;
+ }
+});
+
+if(auth){
+ auth.onAuthStateChanged(user=>{
+  if(!user){
+   currentAdmin=null;
+   document.getElementById("adminDashboard").style.display="none";
+  }
+ });
+}
+</script>
 </body>
 </html>
