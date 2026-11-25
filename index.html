@@ -283,15 +283,42 @@ function showPage(id){
 
 // Super Admin Login
 async function adminLogin(){
- const email = document.getElementById("adminEmail").value.trim();
- const password = document.getElementById("adminPass").value;
- const status = document.getElementById("loginStatus");
+async function adminLogin() {
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPass").value;
+  const status = document.getElementById("loginStatus");
 
- if(!email || !password){
-  status.textContent = "ইমেইল ও পাসওয়ার্ড লিখুন।";
-  return;
- }
+  try {
+    status.textContent = "যাচাই চলছে...";
 
+    const result = await auth.signInWithEmailAndPassword(email, password);
+    const uid = result.user.uid;
+
+    const doc = await db.collection("admins").doc(uid).get();
+
+    if (!doc.exists) {
+      status.textContent = "সমস্যা: admins-এ আপনার UID-এর Document পাওয়া যায়নি। UID: " + uid;
+      return;
+    }
+
+    const data = doc.data();
+
+    if (data.role !== "super_admin") {
+      status.textContent = "সমস্যা: role ভুল। পাওয়া গেছে: " + data.role;
+      return;
+    }
+
+    if (data.active !== true) {
+      status.textContent = "সমস্যা: active Boolean true নয়।";
+      return;
+    }
+
+    status.textContent = "Super Admin হিসেবে প্রবেশ সফল!";
+    
+  } catch (error) {
+    status.textContent = "ত্রুটি: " + error.code + " — " + error.message;
+  }
+}
  try{
   status.textContent = "লগইন যাচাই হচ্ছে...";
   const result = await auth.signInWithEmailAndPassword(email,password);
