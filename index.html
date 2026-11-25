@@ -146,8 +146,51 @@ const db = firebase.firestore();
 <p id="loginStatus">লগইন করা হয়নি</p>
 </div>
 <script>
+<script>
+async function adminLogin() {
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPass").value;
+  const status = document.getElementById("loginStatus");
 
-async function adminLogin(){
+  if (!email || !password) {
+    status.textContent = "ইমেইল ও পাসওয়ার্ড লিখুন।";
+    return;
+  }
+
+  try {
+    status.textContent = "লগইন যাচাই হচ্ছে...";
+
+    const result = await auth.signInWithEmailAndPassword(
+      email,
+      password
+    );
+
+    const uid = result.user.uid;
+
+    const doc = await db.collection("admins").doc(uid).get();
+
+    if (
+      doc.exists &&
+      doc.data().role === "super_admin" &&
+      doc.data().active === true
+    ) {
+      status.textContent = "Super Admin হিসেবে প্রবেশ সফল!";
+    } else {
+      await auth.signOut();
+      status.textContent = "আপনার Admin অনুমতি পাওয়া যায়নি।";
+    }
+
+  } catch (error) {
+    status.textContent = "সমস্যা: " + error.code;
+  }
+}
+
+async function adminLogout() {
+  await auth.signOut();
+  document.getElementById("loginStatus").textContent = "লগআউট হয়েছে।";
+}
+</script>
+{
  const email=document.getElementById("adminEmail").value;
  const password=document.getElementById("adminPass").value;
  const status=document.getElementById("loginStatus");
