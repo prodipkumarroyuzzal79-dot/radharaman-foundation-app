@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -48,7 +49,7 @@ footer{background:#064e3b;color:white;text-align:center;padding:20px;margin-top:
 <button onclick="showSection('gallery')">ছবি</button>
 <button onclick="showSection('contact')">যোগাযোগ</button>
 <button onclick="showSection('application')">আবেদন</button>
-<button onclick="showSection('firebase')">Firebase সংযোগ</button>
+<button onclick="showSection('firebase')">সংযোগ অবস্থা</button>
 <button onclick="showSection('superadmin')">Super Admin</button>
 </nav>
 
@@ -95,14 +96,18 @@ footer{background:#064e3b;color:white;text-align:center;padding:20px;margin-top:
 <h2>আবেদন</h2>
 <form id="applicationForm">
 <label>আবেদনকারীর নাম</label>
-<input id="appName" required>
+<input id="appName" required maxlength="100">
+
 <label>মোবাইল নম্বর</label>
-<input id="appPhone" type="tel" required>
+<input id="appPhone" type="tel" required maxlength="20">
+
 <label>ঠিকানা</label>
-<input id="appAddress" required>
+<input id="appAddress" required maxlength="300">
+
 <label>আবেদনের বিষয়</label>
-<textarea id="appMessage" required></textarea>
-<button class="action" type="submit">আবেদন জমা দিন</button>
+<textarea id="appMessage" required maxlength="3000"></textarea>
+
+<button class="action" id="applicationButton" type="submit">আবেদন জমা দিন</button>
 </form>
 <p id="applicationStatus" class="status"></p>
 </section>
@@ -118,8 +123,10 @@ footer{background:#064e3b;color:white;text-align:center;padding:20px;margin-top:
 <div id="loginBox">
 <label>ইমেইল</label>
 <input id="adminEmail" type="email" autocomplete="username">
+
 <label>পাসওয়ার্ড</label>
 <input id="adminPass" type="password" autocomplete="current-password">
+
 <button class="action" id="loginButton" onclick="adminLogin()">লগইন</button>
 <p id="loginStatus" class="status"></p>
 </div>
@@ -140,7 +147,8 @@ footer{background:#064e3b;color:white;text-align:center;padding:20px;margin-top:
 
 <label>বিভাগের তথ্য</label>
 <textarea id="editContent"></textarea>
-<button class="action" onclick="saveContent()">তথ্য সংরক্ষণ</button>
+
+<button class="action" id="saveButton" onclick="saveContent()">তথ্য সংরক্ষণ</button>
 <p id="saveStatus" class="status"></p>
 
 <hr>
@@ -168,7 +176,7 @@ footer{background:#064e3b;color:white;text-align:center;padding:20px;margin-top:
 <script>
 "use strict";
 
-// আপনার Firebase Console থেকে দেওয়া সম্পূর্ণ Config
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDohiPYANaOW_Pm7XeBfRo5Q2ehqLkINNU",
   authDomain: "radharaman-sanatani-foun-5d5cd.firebaseapp.com",
@@ -179,19 +187,33 @@ const firebaseConfig = {
   measurementId: "G-0C1CQZWJTJ"
 };
 
-// আপনার নির্ধারিত Super Admin UID
+// নির্ধারিত Super Admin UID
 const SUPER_ADMIN_UID = "76CG3vV4U8X3PoOh1m66IX9TKY02";
 
 const CONTENT_SECTIONS = [
-  "porichiti","committee","notice",
-  "activities","gallery","contact"
+  "porichiti",
+  "committee",
+  "notice",
+  "activities",
+  "gallery",
+  "contact"
 ];
 
-let auth = null;
-let db = null;
+let auth;
+let db;
 let loginInProgress = false;
+let firebaseReady = false;
 
-// Firebase চালু
+const el = id => document.getElementById(id);
+
+function showSection(id) {
+  document.querySelectorAll(".panel").forEach(section => {
+    section.classList.remove("active");
+  });
+  el(id).classList.add("active");
+}
+
+// Firebase initialization
 try {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -199,55 +221,56 @@ try {
 
   auth = firebase.auth();
   db = firebase.firestore();
+  firebaseReady = true;
 
-  document.getElementById("connectionStatus").textContent =
-    "Firebase SDK চালু হয়েছে।";
+  el("connectionStatus").textContent =
+    "Firebase SDK চালু হয়েছে। সার্ভারের সঙ্গে সংযোগ যাচাই হচ্ছে...";
+
+  auth.onAuthStateChanged(handleAuthState);
 
   loadPublicContent();
 
 } catch (error) {
-  document.getElementById("connectionStatus").textContent =
+  el("connectionStatus").textContent =
     "Firebase চালু হয়নি: " + error.message;
+  el("loginStatus").textContent =
+    "Firebase সমস্যা: " + error.message;
 }
 
-// বিভাগ পরিবর্তন
-function showSection(id) {
-  document.querySelectorAll(".panel").forEach(section => {
-    section.classList.remove("active");
-  });
-
-  const target = document.getElementById(id);
-  if (target) target.classList.add("active");
-}
-
-// ওয়েবসাইটের প্রকাশিত তথ্য
+// Public content
 async function loadPublicContent() {
+  if (!firebaseReady) return;
+
   for (const section of CONTENT_SECTIONS) {
+    const target = el("content-" + section);
+
     try {
       const doc = await db.collection("siteContent").doc(section).get();
-      const target = document.getElementById("content-" + section);
 
       target.textContent =
-        doc.exists && doc.data().content
+        doc.exists && typeof doc.data().content === "string"
           ? doc.data().content
           : "এই বিভাগের তথ্য এখনো প্রকাশ করা হয়নি।";
 
     } catch (error) {
-      document.getElementById("content-" + section).textContent =
-        "তথ্য পড়া যায়নি: " + error.message;
+      target.textContent = "তথ্য পাওয়া যায়নি: " + error.message;
     }
   }
 
-  document.getElementById("connectionStatus").textContent =
-    "Firebase সংযোগ সক্রিয়।";
+  el("connectionStatus").textContent =
+    "Firebase সংযোগ পরীক্ষা সম্পন্ন।";
 }
 
-// Super Admin অনুমতি যাচাই
+// Super Admin permission check
 async function verifySuperAdmin(user) {
-  if (!user || user.uid !== SUPER_ADMIN_UID) {
+  if (!user) {
+    return {allowed:false, message:"লগইন করা নেই।"};
+  }
+
+  if (user.uid !== SUPER_ADMIN_UID) {
     return {
-      allowed: false,
-      message: "নির্ধারিত Super Admin UID মেলেনি।"
+      allowed:false,
+      message:"এই অ্যাকাউন্ট নির্ধারিত Super Admin নয়।"
     };
   }
 
@@ -255,8 +278,8 @@ async function verifySuperAdmin(user) {
 
   if (!adminDoc.exists) {
     return {
-      allowed: false,
-      message: "admins কালেকশনে আপনার UID-এর Document পাওয়া যায়নি।"
+      allowed:false,
+      message:"admins কালেকশনে আপনার UID-এর Document পাওয়া যায়নি।"
     };
   }
 
@@ -264,40 +287,44 @@ async function verifySuperAdmin(user) {
 
   if (data.role !== "super_admin") {
     return {
-      allowed: false,
-      message: "role অবশ্যই super_admin হতে হবে।"
+      allowed:false,
+      message:"role অবশ্যই super_admin হতে হবে।"
     };
   }
 
   if (data.active !== true) {
     return {
-      allowed: false,
-      message: "active অবশ্যই Boolean true হতে হবে।"
+      allowed:false,
+      message:"active অবশ্যই Boolean true হতে হবে।"
     };
   }
 
   return {allowed:true};
 }
 
-// Super Admin Login
+// Login
 async function adminLogin() {
   if (loginInProgress) return;
+
+  if (!firebaseReady) {
+    el("loginStatus").textContent =
+      "Firebase সংযোগ চালু হয়নি।";
+    return;
+  }
+
   loginInProgress = true;
+  el("loginButton").disabled = true;
+  el("loginStatus").textContent = "লগইন যাচাই চলছে...";
 
-  const status = document.getElementById("loginStatus");
-  const button = document.getElementById("loginButton");
-  const email = document.getElementById("adminEmail").value.trim();
-  const password = document.getElementById("adminPass").value;
-
-  button.disabled = true;
-  status.textContent = "লগইন যাচাই চলছে...";
+  const email = el("adminEmail").value.trim();
+  const password = el("adminPass").value;
 
   try {
     if (!email || !password) {
       throw new Error("ইমেইল ও পাসওয়ার্ড লিখুন।");
     }
 
-    const result = await auth.signInWithEmailAndPassword(email,password);
+    const result = await auth.signInWithEmailAndPassword(email, password);
     const check = await verifySuperAdmin(result.user);
 
     if (!check.allowed) {
@@ -305,26 +332,26 @@ async function adminLogin() {
       throw new Error(check.message);
     }
 
-    document.getElementById("loginBox").classList.add("hidden");
-    document.getElementById("adminDashboard").classList.remove("hidden");
-    status.textContent = "";
+    showAdminDashboard();
+    el("loginStatus").textContent = "";
 
     await loadSelectedContent();
     await loadApplications();
 
   } catch (error) {
-    status.textContent = "লগইন সমস্যা: " + error.message;
+    el("loginStatus").textContent =
+      "লগইন সমস্যা: " + error.message;
   } finally {
     loginInProgress = false;
-    button.disabled = false;
+    el("loginButton").disabled = false;
   }
 }
 
-// আগে থেকে লগইন থাকলে অনুমতি যাচাই
-auth.onAuthStateChanged(async user => {
+// Authentication state
+async function handleAuthState(user) {
   if (!user) {
-    document.getElementById("loginBox").classList.remove("hidden");
-    document.getElementById("adminDashboard").classList.add("hidden");
+    el("loginBox").classList.remove("hidden");
+    el("adminDashboard").classList.add("hidden");
     return;
   }
 
@@ -333,52 +360,60 @@ auth.onAuthStateChanged(async user => {
 
     if (!check.allowed) {
       await auth.signOut();
-      document.getElementById("loginStatus").textContent = check.message;
+      el("loginStatus").textContent = check.message;
       return;
     }
 
-    document.getElementById("loginBox").classList.add("hidden");
-    document.getElementById("adminDashboard").classList.remove("hidden");
-
+    showAdminDashboard();
     await loadSelectedContent();
-    await loadApplications();
 
   } catch (error) {
-    document.getElementById("loginStatus").textContent =
-      "অনুমতি যাচাইয়ের সমস্যা: " + error.message;
-  }
-});
-
-// নির্বাচিত বিভাগের তথ্য
-async function loadSelectedContent() {
-  const section = document.getElementById("editSection").value;
-
-  try {
-    const doc = await db.collection("siteContent").doc(section).get();
-
-    document.getElementById("editContent").value =
-      doc.exists ? (doc.data().content || "") : "";
-
-  } catch (error) {
-    document.getElementById("saveStatus").textContent =
-      "তথ্য পড়া যায়নি: " + error.message;
+    el("loginStatus").textContent =
+      "অনুমতি যাচাই সমস্যা: " + error.message;
   }
 }
 
-document.getElementById("editSection").addEventListener(
-  "change",loadSelectedContent
-);
+function showAdminDashboard() {
+  el("loginBox").classList.add("hidden");
+  el("adminDashboard").classList.remove("hidden");
+}
 
-// তথ্য সংরক্ষণ
-async function saveContent() {
-  const status = document.getElementById("saveStatus");
+// Load selected section
+async function loadSelectedContent() {
+  if (!auth.currentUser) return;
+
+  const section = el("editSection").value;
 
   try {
     const check = await verifySuperAdmin(auth.currentUser);
     if (!check.allowed) throw new Error(check.message);
 
-    const section = document.getElementById("editSection").value;
-    const content = document.getElementById("editContent").value.trim();
+    const doc = await db.collection("siteContent").doc(section).get();
+
+    el("editContent").value =
+      doc.exists ? (doc.data().content || "") : "";
+
+  } catch (error) {
+    el("saveStatus").textContent =
+      "তথ্য পড়া যায়নি: " + error.message;
+  }
+}
+
+el("editSection").addEventListener("change", loadSelectedContent);
+
+// Save content
+async function saveContent() {
+  const status = el("saveStatus");
+  const button = el("saveButton");
+
+  try {
+    const check = await verifySuperAdmin(auth.currentUser);
+    if (!check.allowed) throw new Error(check.message);
+
+    button.disabled = true;
+
+    const section = el("editSection").value;
+    const content = el("editContent").value;
 
     await db.collection("siteContent").doc(section).set({
       content: content,
@@ -390,37 +425,48 @@ async function saveContent() {
 
   } catch (error) {
     status.textContent = "সংরক্ষণ সমস্যা: " + error.message;
+  } finally {
+    button.disabled = false;
   }
 }
 
-// আবেদন জমা
-document.getElementById("applicationForm").addEventListener(
-  "submit",async event => {
-    event.preventDefault();
+// Application submission
+el("applicationForm").addEventListener("submit", async event => {
+  event.preventDefault();
 
-    const status = document.getElementById("applicationStatus");
+  const status = el("applicationStatus");
+  const button = el("applicationButton");
 
-    try {
-      await db.collection("applications").add({
-        name: document.getElementById("appName").value.trim(),
-        phone: document.getElementById("appPhone").value.trim(),
-        address: document.getElementById("appAddress").value.trim(),
-        message: document.getElementById("appMessage").value.trim(),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-
-      status.textContent = "আপনার আবেদন জমা হয়েছে। ধন্যবাদ।";
-      document.getElementById("applicationForm").reset();
-
-    } catch (error) {
-      status.textContent = "আবেদন জমা হয়নি: " + error.message;
-    }
+  if (!firebaseReady) {
+    status.textContent = "Firebase সংযোগ নেই।";
+    return;
   }
-);
 
-// আবেদন তালিকা
+  button.disabled = true;
+  status.textContent = "আবেদন জমা হচ্ছে...";
+
+  try {
+    await db.collection("applications").add({
+      name: el("appName").value.trim(),
+      phone: el("appPhone").value.trim(),
+      address: el("appAddress").value.trim(),
+      message: el("appMessage").value.trim(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    status.textContent = "আপনার আবেদন সফলভাবে জমা হয়েছে। ধন্যবাদ।";
+    el("applicationForm").reset();
+
+  } catch (error) {
+    status.textContent = "আবেদন জমা হয়নি: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+});
+
+// Load applications
 async function loadApplications() {
-  const list = document.getElementById("applicationList");
+  const list = el("applicationList");
   list.textContent = "আবেদন লোড হচ্ছে...";
 
   try {
@@ -428,11 +474,11 @@ async function loadApplications() {
     if (!check.allowed) throw new Error(check.message);
 
     const snapshot = await db.collection("applications")
-      .orderBy("createdAt","desc")
+      .orderBy("createdAt", "desc")
       .limit(50)
       .get();
 
-    list.innerHTML = "";
+    list.replaceChildren();
 
     if (snapshot.empty) {
       list.textContent = "এখনো কোনো আবেদন জমা হয়নি।";
@@ -453,8 +499,7 @@ async function loadApplications() {
         "\nঠিকানা: " + (data.address || "") +
         "\nআবেদন: " + (data.message || "");
 
-      item.appendChild(title);
-      item.appendChild(details);
+      item.append(title, details);
       list.appendChild(item);
     });
 
@@ -467,10 +512,13 @@ async function loadApplications() {
 async function adminLogout() {
   try {
     await auth.signOut();
-    document.getElementById("loginStatus").textContent =
-      "লগআউট সম্পন্ন হয়েছে।";
+    el("loginPass").value = "";
+    el("loginStatus").textContent = "লগআউট সম্পন্ন হয়েছে।";
+    el("loginBox").classList.remove("hidden");
+    el("adminDashboard").classList.add("hidden");
+
   } catch (error) {
-    document.getElementById("loginStatus").textContent =
+    el("loginStatus").textContent =
       "লগআউট সমস্যা: " + error.message;
   }
 }
